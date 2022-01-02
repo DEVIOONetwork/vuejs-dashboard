@@ -1,5 +1,23 @@
 {
   "dependencies": {
     "fastify": "^3.25.3"
-  }
+  },
+  "name": "api",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StudioDEVIOO/vuejs-dashboard.git"
+  },
+  "author": "Cetus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StudioDEVIOO/vuejs-dashboard/issues"
+  },
+  "homepage": "https://github.com/StudioDEVIOO/vuejs-dashboard#readme",
+  "description": ""
 }
