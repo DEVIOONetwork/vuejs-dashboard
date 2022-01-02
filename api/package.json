@@ -4,7 +4,7 @@
   },
   "name": "api",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "src/main.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

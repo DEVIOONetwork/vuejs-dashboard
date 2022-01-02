@@ -1,2 +1,2 @@
 # VueJS dashbaord template (api & client)
-You can read this [client readme file]() and the [api readme file]() for mors informations.
+You can read this [client readme file](https://github.com/StudioDEVIOO/vuejs-dashboard/blob/main/dashboard/README.md) and the [api readme file](https://github.com/StudioDEVIOO/vuejs-dashboard/blob/main/api/README.md) for mors informations.
