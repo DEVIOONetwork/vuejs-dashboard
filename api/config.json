@@ -1,8 +1,6 @@
 {
   "port": 3000,
   "database": {
-    "host": "localhost",
-    "port": 27017,
-    "name": "test"
+    "uri": "mongodb://localhost:27017/vuejs-dashboard-template"
   }
 }

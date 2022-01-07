@@ -1,5 +1,5 @@
 :root {
-
+    --placeholder-color: #363636;
 }
 html {
     scroll-behavior: smooth;
@@ -60,4 +60,8 @@ i[class*="fa-"] {
 }
 .link-primary[class*="link-yellow"]:after {
     background-color: rgba(243, 233, 20, 0.5);
+}
+button {
+    border: none;
+    cursor: pointer;
 }
