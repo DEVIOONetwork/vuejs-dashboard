@@ -1,23 +1,31 @@
 const config = require('../config.json');
-const Database =require('./Auth/Database');
-const UserModel = require('./Auth/Models/User');
+const Database = require('./Database/Database');
 
-const fastify = require('fastify')({
-  logger: true
+const fastify = require('fastify')({ logger: false });
+fastify.register(require('fastify-jwt'), {
+    secret: config.jwt.secret
 })
 
-let db = new Database(config.database.uri);
-
+// CORS
+fastify.register(require('fastify-cors'), {
+    origin: config.client_uri,
+    methods: ['GET', 'POST'],
+    credentials: true
+})
 
 fastify.get('/', async (request, reply) => {
+    await request.jwtVerify()
     reply.type('application/json').code(200)
-    reply.send({ hello: 'world' })
+    reply.send({ ...request.user })
 })
 
+fastify.register(require('./Routes/Auth'))
+
+// Listening
 fastify.listen(config.port, (err, address) => {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
   }
-  fastify.log.info(`server listening on ${address}`)
+  console.log(`server listening on ${address}`)
 })

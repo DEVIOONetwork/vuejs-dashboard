@@ -1,14 +1,20 @@
 <template>
   <Header/>
-  <div id="Login">
-    <div class="login-heading">
-      <h1>Login</h1>
+  <div id="AuthForm">
+    <div id="authForm-heading">
+      Login
     </div>
+    <hr style="border: none; border-bottom: 1px solid #bfbfbf; width: 80%;margin-bottom: 10px">
     <div>
       <form role="form">
+        <div v-if="this.error !== null">
+          <div class="alert alert-danger">
+            {{ this.error }}
+          </div>
+        </div>
         <input type="text" placeholder="Username" v-model="username">
         <input type="password" placeholder="Password" v-model="password">
-        <button class="btn-primary btn-yellow" type="submit" @click.prevent="login">Login</button>
+        <button class="btn-big btn-blue" @click="login" type="submit">Login</button>
       </form>
     </div>
   </div>
@@ -16,53 +22,58 @@
 
 <script>
 import Header from '../components/Header.vue'
+import config from '../config.json'
 
 export default {
   name: 'Login',
   components: {
     Header
+  },
+  data() {
+    return {
+      username: '',
+      password: '',
+      error: null
+    }
+  },
+  methods: {
+    validateFields() {
+      if (this.username === '' || this.password === '') {
+        this.error = 'Please fill in all fields'
+        return false
+      }
+      return true
+    },
+    login() {
+      let valid = this.validateFields()
+      if (valid) {
+
+        fetch(`${config.api.url}/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: this.username,
+            password: this.password
+          })
+        }).then(async res => {
+          let data = await res.json()
+          if (data.error) {
+            data.message ? this.error = data.message : this.error = data.error
+          } else {
+            localStorage.setItem('token', data.token)
+            console.log('Success login!')
+          }
+        }).catch(err => {
+          this.error = 'API error: ' + err.message
+        })
+      }
+    }
   }
 }
 </script>
 
 <style>
-#Login {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #d2d2d2;
-  padding: 20px 50px 50px 50px;
-  border-radius: 10px;
-  width: fit-content;
-  width: -moz-fit-content;
-  margin: auto;
-  margin-top: 50px;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-form input {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 3px;
-  border: 1px solid #7b7b7b;
-  font-family: 'Roboto', sans-serif;
-  outline: none;
-  background-color: transparent;
-}
-::placeholder {
-  color: var(--placeholder-color);
-  opacity: 1;
-}
-:-ms-input-placeholder {
-  color: var(--placeholder-color);
-}
-::-ms-input-placeholder {
-  color: var(--placeholder-color);
-}
+@import url('../assets/css/authForm.css');
 </style>

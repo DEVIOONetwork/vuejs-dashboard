@@ -1,3 +1,5 @@
 {
-  "api_base": "https://api.yourdomain.com"
+  "api": {
+    "url": "http://localhost:3000"
+  }
 }
