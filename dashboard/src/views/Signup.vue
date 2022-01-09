@@ -62,7 +62,6 @@ export default {
           })
         }).then(async res => {
           let data = await res.json()
-          console.log(data)
           if (data.error) {
             data.message ? this.error = data.message : this.error = data.error
           } else {

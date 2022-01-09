@@ -25,6 +25,24 @@ cd dashboard
 npm install
 cd ..
 ```
+### 🚀 Run
+**API**
+```
+cd api
+node .
+```
+**Client**<br>
+#### In development mode:
+```
+cd dashboard
+npm run dev
+```
+#### In production mode:
+```
+cd dashboard
+npm run build
+```
+The dashboard is in the `dist` folder.
 ## 🖼️ Screenshots
 ![Register](https://i.imgur.com/MElsVgq.png)
 ![Login](https://i.imgur.com/GcYMr2E.png)
