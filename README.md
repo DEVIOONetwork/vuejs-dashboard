@@ -3,7 +3,7 @@
 ![Stars](https://img.shields.io/github/stars/StudioDEVIOO/vuejs-dashboard)
 ![Last commit](https://img.shields.io/github/last-commit/StudioDEVIOO/vuejs-dashboard)
 ![All contributors](https://img.shields.io/github/contributors/StudioDEVIOO/vuejs-dashboard)
-#  VueJS dashbaord template (api & client)
+#  VueJS dashboard template (api & client)
 A simple dashboard template using MongoDB, VueJS and Fastify.
 - Fast
 - Simple
