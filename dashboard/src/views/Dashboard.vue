@@ -33,8 +33,8 @@
           <div class="card orange card-medium">
             <p class="title">Edit password</p>
             <form class="txt-content">
-              <input type="password" v-model="editPassword" maxlength="20" class="editAccount"/>
-              <input type="password" v-model="editPasswordConfirm" maxlength="20" class="editAccount"/>
+              <input type="password" v-model="editPassword" maxlength="20" placeholder="Password" class="editAccount"/>
+              <input type="password" v-model="editPasswordConfirm" maxlength="20" placeholder="Confirm Password" class="editAccount"/>
               <button @click="updatePassword()" class="btn-save">Update</button>
             </form>
           </div>
