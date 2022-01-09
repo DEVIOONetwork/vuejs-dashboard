@@ -38,18 +38,11 @@ class Database {
             username : username,
             email: email,
             password: CryptoJS.SHA256(password).toString(),
-            verified: false
         })
 
         await newUser.save()
 
-        this.emailVerif()
-
         return newUser
-    }
-
-    async emailVerif (email) {
-
     }
 
 

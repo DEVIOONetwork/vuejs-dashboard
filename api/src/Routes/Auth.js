@@ -2,8 +2,6 @@ const Database = require("../Database/Database");
 const config = require("../../config.json");
 let db = new Database(config.database.uri);
 
-const CryptoJS = require("crypto-js")
-
 async function routes (fastify, options) {
 
     fastify.route({
@@ -19,8 +17,9 @@ async function routes (fastify, options) {
             }
 
             let token = fastify.jwt.sign({
-                username: req.body.username,
-                password: CryptoJS.SHA256(req.body.password).toString()
+                id: user.id,
+                username: user.username,
+                email: user.email
             })
 
             rep.send({
@@ -44,8 +43,7 @@ async function routes (fastify, options) {
             let token = fastify.jwt.sign({
                 id: user.id,
                 username: user.username,
-                email: user.email,
-                password: CryptoJS.SHA256(req.body.password).toString()
+                email: user.email
             })
 
             rep.send({

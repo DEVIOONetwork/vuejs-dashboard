@@ -64,6 +64,7 @@ export default {
           } else {
             localStorage.setItem('token', data.token)
             console.log('Success login!')
+            await this.$router.push('/dashboard')
           }
         }).catch(err => {
           this.error = 'API error: ' + err.message

@@ -29,6 +29,9 @@ body {
 .btn-primary[class*="btn-blue"] {
     background-color: #00a8ff;
 }
+.btn-primary[class*="btn-red"] {
+    background-color: #ff5252;
+}
 
 .btn-big {
     padding: 10px;
