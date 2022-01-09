@@ -78,7 +78,13 @@ class Database {
         })
     }
 
-    setUsername(id, username) {
+    async setUsername(id, username) {
+        let nv = await User.findOne({
+            username: username
+        })
+
+        if (nv) return false
+
         return User.findOne({
             _id: id
         }).then(user => {
@@ -96,7 +102,13 @@ class Database {
         })
     }
 
-    setEmail(id, email) {
+    async setEmail(id, email) {
+        let ev = await User.findOne({
+            email: email
+        })
+
+        if (ev) return false
+
         return User.findOne({
             _id: id
         }).then(user => {

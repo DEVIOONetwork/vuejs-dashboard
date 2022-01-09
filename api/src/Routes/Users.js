@@ -45,7 +45,13 @@ async function routes (fastify, options) {
             let userID = request.user.id;
             let username = request.body.username;
 
-            await db.setUsername(userID, username);
+            let newUsername = await db.setUsername(userID, username);
+
+            if (!newUsername) {
+                return reply.code(400).send({
+                    "error": "Username already taken"
+                })
+            }
 
             reply.type('application/json').code(200);
             reply.send(
@@ -81,7 +87,13 @@ async function routes (fastify, options) {
             let userID = request.user.id;
             let email = request.body.email;
 
-            await db.setEmail(userID, email);
+            let newMail = await db.setEmail(userID, email);
+
+            if (!newMail) {
+                return reply.code(400).send({
+                    "error": "Email already in use"
+                })
+            }
 
             reply.type('application/json').code(200);
             reply.send(
