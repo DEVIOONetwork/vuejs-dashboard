@@ -1,3 +1,7 @@
+:root {
+    --placeholder-color-edit: #535353;
+}
+
 #dashboard {
     display: flex;
     flex-direction: row;
@@ -144,4 +148,22 @@ textarea.editAccount {
     padding: 10px;
     margin: 10px 0;
     width: 100%;
+}
+input.editAccount::placeholder {
+    color: var(--placeholder-color-edit);
+}
+input.editAccount::-ms-input-placeholder {
+    color: var(--placeholder-color-edit);
+}
+input.editAccount::-webkit-input-placeholder {
+    color: var(--placeholder-color-edit);
+}
+textarea.editAccount::placeholder {
+    color: var(--placeholder-color-edit);
+}
+textarea.editAccount::-ms-input-placeholder {
+    color: var(--placeholder-color-edit);
+}
+textarea.editAccount::-webkit-input-placeholder {
+    color: var(--placeholder-color-edit);
 }

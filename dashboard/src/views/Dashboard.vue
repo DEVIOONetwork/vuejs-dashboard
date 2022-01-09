@@ -18,30 +18,32 @@
         <div class="cardAlign">
           <div class="card orange card-medium">
             <p class="title">Edit username</p>
-            <p class="txt-content">
-              <input type="text" v-model="editUsername" maxlength="20" class="editAccount"/>
+            <form class="txt-content">
+              <input type="text" v-model="editUsername" maxlength="20" placeholder="Username" class="editAccount"/>
               <button @click="updateUsername()" class="btn-save">Update</button>
-            </p>
+            </form>
           </div>
           <div class="card orange card-medium">
             <p class="title">Edit email</p>
-            <p class="txt-content">
-              <input type="text" v-model="editEmail" maxlength="50" class="editAccount"/>
+            <form class="txt-content">
+              <input type="text" v-model="editEmail" maxlength="30" placeholder="exemple@mail.com" class="editAccount"/>
               <button @click="updateEmail()" class="btn-save">Update</button>
-            </p>
+            </form>
           </div>
           <div class="card orange card-medium">
             <p class="title">Edit password</p>
-            <p class="txt-content">
+            <form class="txt-content">
               <input type="password" v-model="editPassword" maxlength="20" class="editAccount"/>
               <input type="password" v-model="editPasswordConfirm" maxlength="20" class="editAccount"/>
               <button @click="updatePassword()" class="btn-save">Update</button>
-            </p>
+            </form>
           </div>
           <div class="card orange card-big">
             <p class="title">Edit bio</p>
-            <textarea v-model="editBio" maxlength="500" class="editAccount"></textarea>
-            <button @click="saveBiography" class="btn-save">Update</button>
+            <form>
+              <textarea v-model="editBio" maxlength="500" placeholder="I'm a developer!" class="editAccount"></textarea>
+              <button @click="updateBiography" class="btn-save">Update</button>
+            </form>
           </div>
         </div>
       </div>
@@ -60,6 +62,8 @@ import Sidebar from "@/components/Sidebar";
 import config from "@/config.json";
 import { useToast } from "vue-toastification"
 import "vue-toastification/dist/index.css";
+
+const toast = useToast();
 
 export default {
   name: 'Dashboard',
@@ -87,11 +91,110 @@ export default {
     methods: {
       changeMode(mode) {
         this.mode = mode
-      }
+      },
+
+      updateUsername() {
+        fetch(`${config.api.url}/users/me/username`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            username: this.editUsername
+          })
+        }).then(async res => {
+          if (res.status === 200) {
+            this.username = this.editUsername
+            this.editUsername = null
+            toast.success("Username updated")
+          } else if (res.status === 400) {
+            let data = await res.json()
+            toast.error(data.error)
+          } else {
+            toast.error("Something went wrong")
+          }
+        }).catch(err => {
+          toast.error(err.toString())
+        })
+      },
+      updateEmail() {
+        fetch(`${config.api.url}/users/me/email`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            email: this.editEmail
+          })
+        }).then(async res => {
+          if (res.status === 200) {
+            this.editEmail = null
+            toast.success("Email updated")
+          } else if (res.status === 400) {
+            let data = await res.json()
+            toast.error(data.error)
+          } else {
+            toast.error("Something went wrong")
+          }
+        }).catch(err => {
+          toast.error(err.toString())
+        })
+      },
+      updatePassword() {
+        fetch(`${config.api.url}/users/me/password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            password: this.editPassword,
+            passwordConfirm: this.editPasswordConfirm
+          })
+        }).then(async res => {
+          if (res.status === 200) {
+            this.editPassword = null
+            this.editPasswordConfirm = null
+            toast.success("Password updated")
+          } else if (res.status === 400) {
+            let data = await res.json()
+            toast.error(data.error)
+          } else {
+            toast.error("Something went wrong")
+          }
+        }).catch(err => {
+          toast.error(err.toString())
+        })
+      },
+      updateBiography() {
+        fetch(`${config.api.url}/users/me/biography`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            biography: this.editBio
+          })
+        }).then(async res => {
+          if (res.status === 200) {
+            this.biography = this.editBio
+            this.editBio = null
+            toast.success("Biography updated")
+          } else if (res.status === 400) {
+            let data = await res.json()
+            toast.error(data.error)
+          } else {
+            toast.error("Something went wrong")
+          }
+        }).catch(err => {
+          toast.error(err.toString())
+        })
+      },
     },
     created() {
-
-      const toast = useToast();
 
       if (localStorage.getItem("token") === null) {
         this.$router.push("/login");

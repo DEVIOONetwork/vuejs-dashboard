@@ -30,13 +30,13 @@ async function routes (fastify, options) {
         handler: async (request, reply) => {
             await request.jwtVerify()
 
-            if (!req.body.username) {
+            if (!request.body.username) {
                 return reply.code(400).send({
                     "error": "Missing username"
                 })
             }
 
-            if (req.body.username.length > 20) {
+            if (request.body.username.length > 20) {
                 return reply.code(400).send({
                     "error": "Username too long"
                 })
@@ -66,13 +66,13 @@ async function routes (fastify, options) {
         handler: async (request, reply) => {
             await request.jwtVerify()
 
-            if (!req.body.email) {
+            if (!request.body.email) {
                 return reply.code(400).send({
                     "error": "Missing email"
                 })
             }
 
-            if (req.body.email.length > 30) {
+            if (request.body.email.length > 30) {
                 return reply.code(400).send({
                     "error": "Email too long"
                 })
@@ -90,6 +90,78 @@ async function routes (fastify, options) {
                     "username": await db.getUsername(userID),
                     "email": email,
                     "biography": await db.getBiography(userID),
+                    "role": await db.getRole(userID)
+                }
+            )
+        }
+    })
+
+    fastify.route({
+        method: 'POST',
+        url: '/users/me/password',
+        handler: async (request, reply) => {
+            await request.jwtVerify()
+
+            if (!request.body.password || !request.body.passwordConfirm) {
+                return reply.code(400).send({
+                    "error": "Missing password"
+                })
+            }
+
+            if (request.body.password !== request.body.passwordConfirm) {
+                return reply.code(400).send({
+                    "error": "Passwords don't match"
+                })
+            }
+
+            let userID = request.user.id;
+            let password = request.body.password;
+
+            await db.setPassword(userID, password);
+
+            reply.type('application/json').code(200);
+            reply.send(
+                {
+                    "id": userID,
+                    "username": await db.getUsername(userID),
+                    "email": await db.getMail(userID),
+                    "biography": await db.getBiography(userID),
+                    "role": await db.getRole(userID)
+                }
+            )
+        }
+    })
+
+    fastify.route({
+        method: 'POST',
+        url: '/users/me/biography',
+        handler: async (request, reply) => {
+            await request.jwtVerify()
+
+            if (!request.body.biography) {
+                return reply.code(400).send({
+                    error: "Missing biography"
+                })
+            }
+
+            if (request.body.biography.length > 500) {
+                return reply.code(400).send({
+                    error: "Biography too long"
+                })
+            }
+
+            let userID = request.user.id;
+            let biography = request.body.biography;
+
+            await db.setBiography(userID, biography);
+
+            reply.type('application/json').code(200);
+            reply.send(
+                {
+                    "id": userID,
+                    "username": await db.getUsername(userID),
+                    "email": await db.getMail(userID),
+                    "biography": biography,
                     "role": await db.getRole(userID)
                 }
             )
