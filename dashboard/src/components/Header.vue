@@ -24,7 +24,8 @@
 
 <style>
   header {
-    background-color: var(--header-bg);
+    background: var(--header-bg);
+    background: linear-gradient(to right, var(--header-bg), #656565);
     padding: 20px;
     text-align: center;
     height: 25px;

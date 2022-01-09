@@ -12,7 +12,7 @@
             {{ this.error }}
           </div>
         </div>
-        <input type="text" placeholder="Username" v-model="username">
+        <input type="text" placeholder="Username" maxlength="20" autofocus v-model="username">
         <input type="password" placeholder="Password" v-model="password">
         <button class="btn-big btn-blue" @click="login" type="submit">Login</button>
       </form>

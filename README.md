@@ -1,4 +1,5 @@
 # VueJS dashbaord template (api & client)
+
 ## Installation
 ```
 git clone https://github.com/StudioDEVIOO/vuejs-dashboard.git

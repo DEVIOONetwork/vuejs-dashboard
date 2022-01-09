@@ -39,6 +39,7 @@ button {
   border: none;
   border-bottom: 1px solid #e5e5e5;
   background: #fff;
+  background: linear-gradient(to bottom, #f3f3f3 0%, #f6f6f6 100%);
   color: #000;
   font-size: 16px;
   font-weight: bold;
@@ -49,5 +50,6 @@ button:hover {
 }
 button.home_button {
   background-color: #3398d5;
+  background: linear-gradient(to bottom, #1b94de, #67bcec);
 }
 </style>

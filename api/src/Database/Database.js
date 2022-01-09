@@ -78,9 +78,52 @@ class Database {
         })
     }
 
-    getUsers() {
-        return User.find({})
+    setUsername(id, username) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            user.username = username
+            return user.save()
+        })
     }
+
+    setPassword(id, password) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            user.password = CryptoJS.SHA256(password).toString()
+            return user.save()
+        })
+    }
+
+    setEmail(id, email) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            user.email = email
+            return user.save()
+        })
+    }
+
+    setBiography(id, biography) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            user.biography = biography
+            return user.save()
+        })
+    }
+
+    setRole(id, role) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            user.role = role
+            return user.save()
+        })
+    }
+
+
 }
 
 module.exports = Database;

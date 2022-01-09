@@ -12,8 +12,8 @@
             {{ this.error }}
           </div>
         </div>
-        <input type="text" placeholder="Username" v-model="username">
-        <input type="email" placeholder="Email" v-model="email">
+        <input type="text" placeholder="Username" autofocus maxlength="20" v-model="username">
+        <input type="email" placeholder="Email" maxlength="30" v-model="email">
         <input type="password" placeholder="Password" v-model="password">
         <button class="btn-big btn-blue" @click="register" type="submit">Register</button>
       </form>

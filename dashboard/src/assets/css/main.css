@@ -1,6 +1,6 @@
 :root {
     --placeholder-color: #a3a3a3;
-    --header-bg: #3e3e3e;
+    --header-bg: #4c4c4c;
 }
 html {
     scroll-behavior: smooth;
@@ -21,17 +21,20 @@ body {
     list-style: none;
 }
 .btn-primary {
-    background-color: #39d084;
+    background: #39d084;
+    background: linear-gradient(to right, #39d084, #2c9f67);
     padding: 10px;
     border-radius: 7px;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
     font-weight: 800;
 }
 .btn-primary[class*="btn-blue"] {
-    background-color: #00a8ff;
+    background: #00a8ff;
+    background: linear-gradient(to right, #00a8ff, #0072ff);
 }
 .btn-primary[class*="btn-red"] {
-    background-color: #ff5252;
+    background: #ff5252;
+    background: linear-gradient(to right, #ff5252, #ff2a2a);
 }
 
 .btn-big {
