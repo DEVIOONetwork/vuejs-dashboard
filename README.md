@@ -26,7 +26,11 @@ npm install
 cd ..
 ```
 ## 🖼️ Screenshots
-
+![Register](https://i.imgur.com/MElsVgq.png)
+![Login](https://i.imgur.com/GcYMr2E.png)
+![Dashboard](https://i.imgur.com/dVtnfhV.png)
+![Alert Success](https://i.imgur.com/nC6nhXl.png)
+![Alert error](https://i.imgur.com/5NHu8Dt.png)
 ## 👥 Contributors:
 - [Cetus](https://github.com/dev-cetus)
 - [Pronicio](https://github.com/Pronicio)
