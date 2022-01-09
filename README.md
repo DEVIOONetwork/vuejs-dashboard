@@ -32,6 +32,8 @@ cd ..
 cd api
 node .
 ```
+<hr style="border:none;border-bottom: 1px gray solid">
+
 **Client**<br>
 #### In development mode:
 ```
