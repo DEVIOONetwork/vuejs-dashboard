@@ -1,5 +1,6 @@
 :root {
     --placeholder-color: #a3a3a3;
+    --header-bg: #3e3e3e;
 }
 html {
     scroll-behavior: smooth;

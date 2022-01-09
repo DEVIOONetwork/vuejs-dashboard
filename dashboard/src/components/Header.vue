@@ -24,9 +24,10 @@
 
 <style>
   header {
-    background-color: #3e3e3e;
+    background-color: var(--header-bg);
     padding: 20px;
     text-align: center;
+    height: 25px;
   }
   header ul {
     display: flex;

@@ -12,7 +12,7 @@ class Database {
         });
     }
 
-    async login (username, password) {
+    async login(username, password) {
         let user = await User.findOne({
             username: username
         })
@@ -20,7 +20,8 @@ class Database {
         if (!user) return false
 
         let pass = CryptoJS.SHA256(password).toString()
-        return pass === user.password;
+
+        return user.password === pass ? user : false
     }
 
     async register(username, email, password) {
@@ -35,7 +36,7 @@ class Database {
         if ((ev || nv)) return false
 
         let newUser = new User({
-            username : username,
+            username: username,
             email: email,
             password: CryptoJS.SHA256(password).toString(),
         })
@@ -45,6 +46,41 @@ class Database {
         return newUser
     }
 
+    getUsername(id) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            return user.username
+        })
+    }
 
+    getMail(id) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            return user.email
+        })
+    }
+
+    getBiography(id) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            return user.biography
+        })
+    }
+
+    getRole(id) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            return user.role
+        })
+    }
+
+    getUsers() {
+        return User.find({})
+    }
 }
+
 module.exports = Database;
