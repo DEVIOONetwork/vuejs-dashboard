@@ -26,6 +26,7 @@ npm install
 cd ..
 ```
 ### 🚀 Run
+⚠️**EDIT `api/config.json` and `dashboard/src/config.json`**<br><br>
 **API**
 ```
 cd api
