@@ -21,16 +21,16 @@
     <div class="btn-oauth2">
       <div class="google-btn" @click="openGoogleOauth2">
         <div class="google-icon-wrapper">
-          <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+          <img class="google-icon" src="../assets/medias/google_logo.svg"/>
         </div>
-        <p class="btn-text"><b> Login with google</b></p>
+        <p class="btn-text"><b> Login with Google</b></p>
       </div>
       <br>
       <div class="discord-btn" @click="openDiscordOauth2">
         <div class="discord-icon-wrapper">
-          <img class="discord-icon" src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg"/>
+          <img class="discord-icon" src="../assets/medias/discord_logo.svg"/>
         </div>
-        <p class="btn-text"><b>  Login with discord</b></p>
+        <p class="btn-text"><b> Login with Discord</b></p>
       </div>
     </div>
   </div>
