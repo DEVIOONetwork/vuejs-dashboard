@@ -17,39 +17,27 @@
         <button class="btn-big btn-blue" @click="login" type="submit">Login</button>
       </form>
     </div>
-    <hr style="border: none; border-bottom: 1px solid #bfbfbf; width: 80%;margin-bottom: 10px">
-    <div class="btn-oauth2">
-      <div class="google-btn" @click="openGoogleOauth2">
-        <div class="google-icon-wrapper">
-          <img class="google-icon" src="../assets/medias/google_logo.svg"/>
-        </div>
-        <p class="btn-text"><b> Login with Google</b></p>
-      </div>
-      <br>
-      <div class="discord-btn" @click="openDiscordOauth2">
-        <div class="discord-icon-wrapper">
-          <img class="discord-icon" src="../assets/medias/discord_logo.svg"/>
-        </div>
-        <p class="btn-text"><b> Login with Discord</b></p>
-      </div>
-    </div>
+    <Oauth2Buttons/>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header.vue'
+import Oauth2Buttons from "@/components/Oauth2Buttons";
 import config from '../config.json'
 
 export default {
   name: 'Login',
   components: {
-    Header
+    Header,
+    Oauth2Buttons
   },
   data() {
     return {
       username: '',
       password: '',
-      error: null
+      error: null,
+      windowObjectReference: null
     }
   },
   methods: {
@@ -86,12 +74,6 @@ export default {
           this.error = 'API error: ' + err.message
         })
       }
-    },
-    openGoogleOauth2() {
-      window.open(config.oauth2.google.login);
-    },
-    openDiscordOauth2() {
-      window.open(config.oauth2.discord.login);
     }
   }
 }
