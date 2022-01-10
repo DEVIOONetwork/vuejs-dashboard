@@ -27,7 +27,8 @@ npm install
 cd ..
 ```
 ### 🚀 Run
-⚠️**EDIT `api/config.json` and `dashboard/src/config.json`**<br><br>
+⚠️**EDIT `api/config.json` and `dashboard/src/config.json`**  
+⚠️ [And don't forget to configure the oauth2 systems!](https://github.com/StudioDEVIOO/vuejs-dashboard/wiki/Oauth2-Configuration)<br><br>
 **API**
 ```
 cd api
