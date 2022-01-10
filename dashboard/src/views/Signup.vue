@@ -91,10 +91,10 @@ export default {
       }
     },
     openGoogleOauth2() {
-      window.open("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https://vue-dash-api.pronicio.tk/oauth2/google/signup&client_id=712321817044-fk6kbn5vcj6pdt6ehbr9es3bl7rmp757.apps.googleusercontent.com");
+      window.open(config.oauth2.google.signup);
     },
     openDiscordOauth2() {
-      window.open("https://discord.com/api/oauth2/authorize?client_id=929791388541943858&redirect_uri=https%3A%2F%2Fvue-dash-api.pronicio.tk%2Foauth2%2Fdiscord%2Fsignup&response_type=code&scope=identify%20email");
+      window.open(config.oauth2.discord.signup);
     }
   }
 }
