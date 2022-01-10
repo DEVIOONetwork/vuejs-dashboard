@@ -1,6 +1,7 @@
 const Database = require("../Database/Database");
 const config = require("../../config.json");
 let db = new Database(config.database.uri);
+const axios = require("axios");
 
 async function routes (fastify, options) {
 
@@ -83,6 +84,190 @@ async function routes (fastify, options) {
         }
 
     })
+
+    fastify.route({
+        method: 'GET',
+        url: '/oauth2/discord/signup',
+        handler: async (req, rep) => {
+            let discordCode = req.query.code
+
+            const params = new URLSearchParams()
+            params.append('client_id', config.oauth2.discord.client_id)
+            params.append('client_secret', config.oauth2.discord.secret)
+            params.append('grant_type', 'authorization_code')
+            params.append('code', discordCode)
+            params.append('redirect_uri', config.oauth2.discord.redirect_uri.signup)
+
+            const reqConfig = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+
+            let dio = await axios.post("https://discord.com/api/oauth2/token", params, reqConfig);
+
+            let userResult = await axios.get('https://discord.com/api/users/@me', {
+                headers: {
+                    authorization: `${dio.data.token_type} ${dio.data.access_token}`,
+                },
+            });
+
+            let user = await db.register(userResult.data.username, userResult.data.email, genPassword(50))
+
+            if (!user) {
+                return rep.send({
+                    error: 'Username or email already used!'
+                });
+            }
+
+            let token = fastify.jwt.sign({
+                id: user.id,
+                username: user.username,
+                email: user.email
+            })
+
+            rep.redirect(`${config.client_uri}?token=${token}`)
+        }
+    })
+
+    fastify.route({
+        method: 'GET',
+        url: '/oauth2/discord/login',
+        handler: async (req, rep) => {
+            let discordCode = req.query.code
+
+            const params = new URLSearchParams()
+            params.append('client_id', config.oauth2.discord.client_id)
+            params.append('client_secret', config.oauth2.discord.secret)
+            params.append('grant_type', 'authorization_code')
+            params.append('code', discordCode)
+            params.append('redirect_uri', config.oauth2.discord.redirect_uri.login)
+
+            const reqConfig = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+
+            let dio = await axios.post("https://discord.com/api/oauth2/token", params, reqConfig);
+
+            let userResult = await axios.get('https://discord.com/api/users/@me', {
+                headers: {
+                    authorization: `${dio.data.token_type} ${dio.data.access_token}`,
+                },
+            });
+
+            let user = await db.login(userResult.data.email, null, "discord")
+
+            if (!user) {
+                return rep.send({
+                    error: 'Invalid username'
+                });
+            }
+
+            let token = fastify.jwt.sign({
+                id: user.id,
+                username: user.username,
+                email: user.email
+            })
+
+            rep.redirect(`${config.client_uri}?token=${token}`)
+        }
+    })
+
+    fastify.route({
+        method: 'GET',
+        url: '/oauth2/google/signup',
+        handler: async (req, rep) => {
+            let googleCode = req.query.code
+
+            const params = new URLSearchParams()
+            params.append('client_id', config.oauth2.google.client_id)
+            params.append('client_secret', config.oauth2.google.secret)
+            params.append('grant_type', 'authorization_code')
+            params.append('code', googleCode)
+            params.append('redirect_uri', config.oauth2.google.redirect_uri.signup)
+
+            const reqConfig = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+
+            let dio = await axios.post("https://oauth2.googleapis.com/token", params, reqConfig);
+
+            let userResult = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${dio.data.access_token}`);
+
+            let user = await db.register(userResult.data.given_name, userResult.data.email, genPassword(50))
+
+            if (!user) {
+                return rep.send({
+                    error: 'Username or email already used!'
+                });
+            }
+
+            let token = fastify.jwt.sign({
+                id: user.id,
+                username: user.username,
+                email: user.email
+            })
+
+            rep.redirect(`${config.client_uri}?token=${token}`)
+        }
+    })
+
+    fastify.route({
+        method: 'GET',
+        url: '/oauth2/google/login',
+        handler: async (req, rep) => {
+            let googleCode = req.query.code
+
+            const params = new URLSearchParams()
+            params.append('client_id', config.oauth2.google.client_id)
+            params.append('client_secret', config.oauth2.google.secret)
+            params.append('grant_type', 'authorization_code')
+            params.append('code', googleCode)
+            params.append('redirect_uri', config.oauth2.google.redirect_uri.login)
+
+            const reqConfig = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+
+            let dio = await axios.post("https://oauth2.googleapis.com/token", params, reqConfig);
+
+            let userResult = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${dio.data.access_token}`);
+
+            let user = await db.login(userResult.data.given_name, genPassword(50), "google")
+
+            if (!user) {
+                return rep.send({
+                    error: 'Invalid username'
+                });
+            }
+
+            let token = fastify.jwt.sign({
+                id: user.id,
+                username: user.username,
+                email: user.email
+            })
+
+            rep.redirect(`${config.client_uri}?token=${token}`)
+        }
+    })
+}
+
+function genPassword(length) {
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$*£ù:/+=]|`"#-';
+    let charactersLength = characters.length;
+
+    for (let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
 }
 
 module.exports = routes;

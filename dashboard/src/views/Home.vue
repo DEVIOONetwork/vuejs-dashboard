@@ -15,6 +15,13 @@ export default {
   name: 'Home',
   components: {
     Header
+  },
+  created: async function () {
+    if (this.$route.query.token) {
+      localStorage.setItem('token', this.$route.query.token)
+      console.log('Success login!')
+      await this.$router.push('/dashboard')
+    }
   }
 }
 </script>

@@ -12,12 +12,20 @@ class Database {
         });
     }
 
-    async login(username, password) {
+    async login(username, password, oauth2) {
         let user = await User.findOne({
             username: username
         })
 
-        if (!user) return false
+        if (!user) {
+            user = await User.findOne({
+                email: username
+            })
+
+            if (!user) return false
+        }
+
+        if (oauth2) return user
 
         let pass = CryptoJS.SHA256(password).toString()
 

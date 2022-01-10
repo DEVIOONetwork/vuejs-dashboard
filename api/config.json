@@ -7,5 +7,23 @@
   "jwt": {
     "secret": "vuejs-dashboard-template",
     "expiresIn": "1d"
+  },
+  "oauth2": {
+    "discord": {
+      "secret": "discord_secret",
+      "client_id": "discord_client_id",
+      "redirect_uri": {
+        "signup": "http://127.0.0.1:3000/oauth2/discord/signup",
+        "login": "http://127.0.0.1:3000/oauth2/discord/login"
+      }
+    },
+    "google": {
+      "secret": "google_secret",
+      "client_id": "google_client_id",
+      "redirect_uri": {
+        "signup": "http://127.0.0.1:3000/oauth2/google/signup",
+        "login": "http://127.0.0.1:3000/oauth2/google/login"
+      }
+    }
   }
 }
