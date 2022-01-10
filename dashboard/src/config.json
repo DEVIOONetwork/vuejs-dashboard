@@ -1,6 +1,6 @@
 {
   "api": {
-    "url": "https://vue-dash-api.pronicio.tk"
+    "url": "http://127.0.0.1:3000"
   },
   "oauth2": {
     "discord": {

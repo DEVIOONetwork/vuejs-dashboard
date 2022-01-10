@@ -25,6 +25,8 @@
 import Header from '../components/Header.vue'
 import Oauth2Buttons from "@/components/Oauth2Buttons";
 import config from '../config.json'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 export default {
   name: 'Login',
@@ -71,7 +73,8 @@ export default {
             await this.$router.push('/dashboard')
           }
         }).catch(err => {
-          this.error = 'API error: ' + err.message
+          let toast = new Toast()
+          new toast.error('API error: ' + err.message)
         })
       }
     }
