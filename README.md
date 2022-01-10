@@ -1,5 +1,4 @@
 [![License](https://img.shields.io/github/license/StudioDEVIOO/vuejs-dashboard)](https://github.com/StudioDEVIOO/vuejs-dashboard/blob/main/LICENSE)
-![Downloads](https://img.shields.io/github/downloads/StudioDEVIOO/vuejs-dashboard/total)
 ![Stars](https://img.shields.io/github/stars/StudioDEVIOO/vuejs-dashboard)
 ![Last commit](https://img.shields.io/github/last-commit/StudioDEVIOO/vuejs-dashboard)
 ![All contributors](https://img.shields.io/github/contributors/StudioDEVIOO/vuejs-dashboard)
