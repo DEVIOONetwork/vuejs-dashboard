@@ -12,7 +12,7 @@
 import Header from '../components/Header.vue'
 
 import {useToast} from "vue-toastification";
-import "vue-toastification/dist/index.css";
+import '../assets/css/toast.min.css'
 const toast = useToast();
 
 export default {

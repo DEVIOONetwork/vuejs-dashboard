@@ -30,7 +30,7 @@
               <button @click="updateEmail()" class="btn-save">Update</button>
             </form>
           </div>
-          <div class="card orange card-medium">
+          <div v-if="this.oauth" class="card orange card-medium">
             <p class="title">Edit password</p>
             <form class="txt-content">
               <input type="password" v-model="editPassword" maxlength="20" placeholder="Password" class="editAccount"/>
@@ -61,7 +61,7 @@ import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import config from "@/config.json";
 import { useToast } from "vue-toastification"
-import "vue-toastification/dist/index.css";
+import "../assets/css/toast.min.css";
 
 const toast = useToast();
 
@@ -75,6 +75,7 @@ export default {
     return {
       username: null,
       biography: null,
+      oauth: null,
       items: [
         {
          name: "Dashboard",
@@ -212,6 +213,7 @@ export default {
           let data = await response.json();
           this.username = data.username;
           this.biography = data.biography;
+          this.oauth = data.oauth;
 
         })
       .catch(error => {

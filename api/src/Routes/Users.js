@@ -18,7 +18,8 @@ async function routes (fastify, options) {
                     "username": await db.getUsername(userID),
                     "email": await db.getMail(userID),
                     "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID)
+                    "role": await db.getRole(userID),
+                    "oauth": await db.getOauth(userID),
                 }
             )
         }
@@ -60,7 +61,8 @@ async function routes (fastify, options) {
                     "username": username,
                     "email": await db.getMail(userID),
                     "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID)
+                    "role": await db.getRole(userID),
+                    "oauth": await db.getOauth(userID),
                 }
             )
         }
@@ -102,7 +104,8 @@ async function routes (fastify, options) {
                     "username": await db.getUsername(userID),
                     "email": email,
                     "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID)
+                    "role": await db.getRole(userID),
+                    "oauth": await db.getOauth(userID),
                 }
             )
         }
@@ -129,6 +132,14 @@ async function routes (fastify, options) {
             let userID = request.user.id;
             let password = request.body.password;
 
+            let oauth = await db.getOauth(userID);
+
+            if (!oauth) {
+                return reply.code(400).send({
+                    "error": "You can't change your password if you're logged in with an OAuth provider"
+                })
+            }
+
             await db.setPassword(userID, password);
 
             reply.type('application/json').code(200);
@@ -138,7 +149,8 @@ async function routes (fastify, options) {
                     "username": await db.getUsername(userID),
                     "email": await db.getMail(userID),
                     "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID)
+                    "role": await db.getRole(userID),
+                    "oauth": await db.getOauth(userID),
                 }
             )
         }
@@ -174,7 +186,8 @@ async function routes (fastify, options) {
                     "username": await db.getUsername(userID),
                     "email": await db.getMail(userID),
                     "biography": biography,
-                    "role": await db.getRole(userID)
+                    "role": await db.getRole(userID),
+                    "oauth": await db.getOauth(userID),
                 }
             )
         }

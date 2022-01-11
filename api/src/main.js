@@ -1,6 +1,6 @@
 const config = require('../config.json');
 
-const fastify = require('fastify')({ logger: false });
+const fastify = require('fastify')({ logger: true });
 fastify.register(require('fastify-jwt'), {
     secret: config.jwt.secret,
     sign: {

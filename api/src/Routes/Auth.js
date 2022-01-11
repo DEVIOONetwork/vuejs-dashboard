@@ -59,7 +59,7 @@ async function routes (fastify, options) {
                 });
             }
 
-            let user = await db.register(req.body.username, req.body.email, req.body.password)
+            let user = await db.register(req.body.username, req.body.email, req.body.password, false)
 
             if (!user) {
                 return rep.send({
@@ -115,7 +115,7 @@ async function routes (fastify, options) {
             let user = await db.login(userResult.data.email, null, "google")
 
             if (!user) {
-                user = await db.register(userResult.data.username, userResult.data.email, genPassword(50))
+                user = await db.register(userResult.data.username, userResult.data.email, genPassword(50), true)
             }
 
             if (!user) {
@@ -159,7 +159,7 @@ async function routes (fastify, options) {
             let user = await db.login(userResult.data.email, null, "google")
 
             if (!user) {
-                user = await db.register(userResult.data.given_name, userResult.data.email, genPassword(50))
+                user = await db.register(userResult.data.given_name, userResult.data.email, genPassword(50), true)
             }
 
             if (!user) {
