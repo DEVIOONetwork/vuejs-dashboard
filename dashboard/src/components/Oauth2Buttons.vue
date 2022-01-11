@@ -24,10 +24,10 @@ export default {
   name: 'Oauth2Buttons',
   methods: {
     openGoogleOauth2() {
-      this.windowObjectReference = window.open(config.oauth2.google.login, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')
+      return window.location.href = (config.oauth2.google)
     },
     openDiscordOauth2() {
-      this.windowObjectReference = window.open(config.oauth2.discord.login, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')
+      return window.location.href = (config.oauth2.discord)
     }
   }
 }
