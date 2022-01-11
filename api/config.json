@@ -10,8 +10,8 @@
   },
   "oauth2": {
     "discord": {
-      "secret": "eBWzpHvBVm6VaMO1Yvbo4KdhyoVffCaX",
-      "client_id": "930536252330098738",
+      "secret": "discord_secret",
+      "client_id": "discord_client_id",
       "redirect_uri": "http://127.0.0.1:3000/oauth2/discord"
     },
     "google": {
