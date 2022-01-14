@@ -18,21 +18,21 @@
         <div class="cardAlign">
           <div class="card orange card-medium">
             <p class="title">Edit username</p>
-            <form class="txt-content">
+            <form class="txt-content" v-on:submit.prevent="updateUsername">
               <input type="text" v-model="editUsername" maxlength="20" placeholder="Username" class="editAccount"/>
               <button @click="updateUsername()" class="btn-save">Update</button>
             </form>
           </div>
-          <div class="card orange card-medium">
+          <div v-if="this.oauth" class="card orange card-medium">
             <p class="title">Edit email</p>
-            <form class="txt-content">
+            <form class="txt-content" v-on:submit.prevent="updateEmail">
               <input type="text" v-model="editEmail" maxlength="30" placeholder="exemple@mail.com" class="editAccount"/>
               <button @click="updateEmail()" class="btn-save">Update</button>
             </form>
           </div>
           <div v-if="this.oauth" class="card orange card-medium">
             <p class="title">Edit password</p>
-            <form class="txt-content">
+            <form class="txt-content" v-on:submit.prevent="updatePassword">
               <input type="password" v-model="editPassword" maxlength="20" placeholder="Password" class="editAccount"/>
               <input type="password" v-model="editPasswordConfirm" maxlength="20" placeholder="Confirm Password" class="editAccount"/>
               <button @click="updatePassword()" class="btn-save">Update</button>
@@ -40,7 +40,7 @@
           </div>
           <div class="card orange card-big">
             <p class="title">Edit bio</p>
-            <form>
+            <form v-on:submit.prevent="updateBiography">
               <textarea v-model="editBio" maxlength="500" placeholder="I'm a developer!" class="editAccount"></textarea>
               <button @click="updateBiography" class="btn-save">Update</button>
             </form>

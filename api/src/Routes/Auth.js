@@ -119,9 +119,7 @@ async function routes (fastify, options) {
             }
 
             if (!user) {
-                return rep.send({
-                    error: 'Username or email already used!'
-                });
+                rep.redirect(`${config.client_uri}/Login?error=Username+or+email+already+used!`)
             }
 
             let token = fastify.jwt.sign({
@@ -163,9 +161,7 @@ async function routes (fastify, options) {
             }
 
             if (!user) {
-                return rep.send({
-                    error: 'Invalid username'
-                });
+                rep.redirect(`${config.client_uri}/Login?error=Username+or+email+already+used!`)
             }
 
             let token = fastify.jwt.sign({

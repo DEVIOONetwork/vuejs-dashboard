@@ -11,10 +11,6 @@
 <script>
 import Header from '../components/Header.vue'
 
-import {useToast} from "vue-toastification";
-import '../assets/css/toast.min.css'
-const toast = useToast();
-
 export default {
   name: 'Home',
   components: {
@@ -25,9 +21,6 @@ export default {
       localStorage.setItem('token', this.$route.query.token)
       console.log('Success login!')
       await this.$router.push('/dashboard')
-    }
-    if (this.$route.query.error) {
-      toast.error(this.$route.query.error)
     }
   }
 }

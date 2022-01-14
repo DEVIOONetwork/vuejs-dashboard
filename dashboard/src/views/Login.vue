@@ -6,7 +6,7 @@
     </div>
     <hr style="border: none; border-bottom: 1px solid #bfbfbf; width: 80%;margin-bottom: 10px">
     <div>
-      <form v-on:submit.prevent="register">
+      <form v-on:submit.prevent="login">
         <div v-if="this.error !== null">
           <div class="alert alert-danger">
             {{ this.error }}
@@ -25,6 +25,10 @@
 import Header from '../components/Header.vue'
 import Oauth2Buttons from "@/components/Oauth2Buttons";
 import config from '../config.json'
+
+import {useToast} from "vue-toastification";
+import '../assets/css/toast.min.css'
+const toast = useToast();
 
 export default {
   name: 'Login',
@@ -79,6 +83,9 @@ export default {
   created() {
     if (localStorage.getItem('token')) {
       this.$router.push('/dashboard')
+    }
+    if (this.$route.query.error) {
+      toast.error(this.$route.query.error)
     }
   }
 }
