@@ -3,15 +3,15 @@
   "database": {
     "uri": "mongodb://localhost:27017/vuejs-dashboard-template"
   },
-  "client_uri": "http://localhost:8395",
+  "client_uri": "https://dashboard-template.devioo.com/",
   "jwt": {
     "secret": "vuejs-dashboard-template",
     "expiresIn": "1d"
   },
   "oauth2": {
     "discord": {
-      "secret": "sgP3fT8btdoxrSCthraC6AuZla0lDSm5",
-      "client_id": "930536252330098738",
+      "secret": "discord_secret",
+      "client_id": "discord_client_id",
       "redirect_uri": "http://127.0.0.1:3000/oauth2/discord"
     },
     "google": {
