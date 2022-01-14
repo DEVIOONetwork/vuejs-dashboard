@@ -1,6 +1,4 @@
 .DS_Store
-api/node_modules
-dashbaord/node_modules
 node_modules
 /dist
 

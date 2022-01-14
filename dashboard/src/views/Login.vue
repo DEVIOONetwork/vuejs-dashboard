@@ -6,7 +6,7 @@
     </div>
     <hr style="border: none; border-bottom: 1px solid #bfbfbf; width: 80%;margin-bottom: 10px">
     <div>
-      <form role="form">
+      <form v-on:submit.prevent="register">
         <div v-if="this.error !== null">
           <div class="alert alert-danger">
             {{ this.error }}
