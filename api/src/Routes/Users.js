@@ -20,6 +20,7 @@ async function routes (fastify, options) {
                     "biography": await db.getBiography(userID),
                     "role": await db.getRole(userID),
                     "oauth": await db.getOauth(userID),
+                    "avatar": await db.getAvatar(userID),
                 }
             )
         }
@@ -63,6 +64,7 @@ async function routes (fastify, options) {
                     "biography": await db.getBiography(userID),
                     "role": await db.getRole(userID),
                     "oauth": await db.getOauth(userID),
+                    "avatar": await db.getAvatar(userID),
                 }
             )
         }
@@ -106,6 +108,7 @@ async function routes (fastify, options) {
                     "biography": await db.getBiography(userID),
                     "role": await db.getRole(userID),
                     "oauth": await db.getOauth(userID),
+                    "avatar": await db.getAvatar(userID),
                 }
             )
         }
@@ -151,6 +154,7 @@ async function routes (fastify, options) {
                     "biography": await db.getBiography(userID),
                     "role": await db.getRole(userID),
                     "oauth": await db.getOauth(userID),
+                    "avatar": await db.getAvatar(userID),
                 }
             )
         }
@@ -188,6 +192,7 @@ async function routes (fastify, options) {
                     "biography": biography,
                     "role": await db.getRole(userID),
                     "oauth": await db.getOauth(userID),
+                    "avatar": await db.getAvatar(userID),
                 }
             )
         }

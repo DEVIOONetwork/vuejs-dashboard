@@ -112,10 +112,10 @@ async function routes (fastify, options) {
                 },
             });
 
-            let user = await db.login(userResult.data.email, null, "google")
+            let user = await db.login(userResult.data.email, null, true)
 
             if (!user) {
-                user = await db.register(userResult.data.username, userResult.data.email, genPassword(50), true)
+                user = await db.register(userResult.data.username, userResult.data.email, genPassword(50), true, `https://cdn.discordapp.com/avatars/${userResult.data.id}/${userResult.data.avatar}.webp?size=256`)
             }
 
             if (!user) {
@@ -154,10 +154,10 @@ async function routes (fastify, options) {
             let dio = await axios.post("https://oauth2.googleapis.com/token", params, reqConfig);
             let userResult = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${dio.data.access_token}`);
 
-            let user = await db.login(userResult.data.email, null, "google")
+            let user = await db.login(userResult.data.email, null, true)
 
             if (!user) {
-                user = await db.register(userResult.data.given_name, userResult.data.email, genPassword(50), true)
+                user = await db.register(userResult.data.given_name, userResult.data.email, genPassword(50), true, userResult.data.picture)
             }
 
             if (!user) {

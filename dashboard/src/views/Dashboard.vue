@@ -7,6 +7,10 @@
       <div id="default" v-if="mode === null || mode === 'Dashboard'">
 
         <div class="cardAlign">
+          <div class="card blue fit-content">
+            <img v-if="avatar" :src="avatar" height="130" alt="avatar">
+            <img v-if="!avatar" height="130" :src="`https://avatars.dicebear.com/api/avataaars/${username}.svg`" alt="avatar">
+          </div>
           <div class="card purple card-medium">
             <p class="title">Welcome {{ username }} <i class="twa twa-waving-hand"></i></p>
             <p class="txt-content">{{ biography === null ? "No biography" : biography }}</p>
@@ -86,7 +90,8 @@ export default {
           icon: "fas fa-sign-out-alt",
         }
       ],
-      mode: null
+      mode: null,
+      avatar: null,
       }
     },
     methods: {
@@ -214,6 +219,7 @@ export default {
           this.username = data.username;
           this.biography = data.biography;
           this.oauth = data.oauth;
+          this.avatar = data.avatar;
 
         })
       .catch(error => {
