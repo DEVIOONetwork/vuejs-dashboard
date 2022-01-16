@@ -1,9 +1,9 @@
 {
   "api": {
-    "url": "http://localhost:3000"
+    "url": "https://vue-dash-api.pronicio.tk"
   },
   "oauth2": {
-    "discord": "https://discord.com/api/oauth2/authorize?client_id=930536252330098738&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Foauth2%2Fdiscord&response_type=code&scope=identify%20email",
+    "discord": "https://discord.com/api/oauth2/authorize?client_id=929791388541943858&redirect_uri=https%3A%2F%2Fvue-dash-api.pronicio.tk%2Foauth2%2Fdiscord&response_type=code&scope=identify%20email",
     "google": "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https://vue-dash-api.pronicio.tk/oauth2/google&client_id=712321817044-fk6kbn5vcj6pdt6ehbr9es3bl7rmp757.apps.googleusercontent.com"
   }
 }
