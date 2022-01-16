@@ -23,6 +23,7 @@ cd ..
 ```
 ```
 cd dashboard
+npm install @vue/cli
 npm install
 cd ..
 ```
