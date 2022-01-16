@@ -43,7 +43,7 @@ node .
 #### In development mode:
 ```
 cd dashboard
-npm run dev
+npm run serve
 ```
 #### In production mode:
 ```
