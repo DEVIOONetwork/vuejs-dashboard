@@ -3,7 +3,7 @@
   "database": {
     "uri": "mongodb://localhost:27017/vuejs-dashboard-template"
   },
-  "client_uri": "https://dashboard-template.devioo.com/",
+  "client_uri": "http://localhost:8080",
   "jwt": {
     "secret": "vuejs-dashboard-template",
     "expiresIn": "1d"

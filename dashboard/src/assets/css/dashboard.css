@@ -87,8 +87,11 @@ a.card[class*="txt-big"] {
     background: #6f42c1;
     background: linear-gradient(to bottom, #6f42c1 0%, #a55eea 100%);
 }
-.card[class*="card-big"] {
-    width: 500px
+.card[class*="fit-content"] {
+    width: fit-content;
+    width: -moz-fit-content;
+    height: fit-content;
+    height: -moz-fit-content;
 }
 .card[class*="card-small"] {
     width: 200px
@@ -98,6 +101,9 @@ a.card[class*="txt-big"] {
 }
 .card[class*="card-large"] {
     width: 400px
+}
+.card[class*="card-big"] {
+    width: 500px
 }
 .card .title {
     font-weight: 900;
