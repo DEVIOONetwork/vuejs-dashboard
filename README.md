@@ -11,7 +11,8 @@ A simple dashboard template using MongoDB, VueJS and Fastify.
 
 If you are using MariaDB (or another SQL database), you can use [API for MariaDB](https://github.com/dev-cetus/vuejs-dashboard-api-mariadb).
 ## 📥 Installation
-First, [install NodeJS](https://nodejs.org/en/).
+First, [install NodeJS](https://nodejs.org/en/). <br>
+Then, [install MongoDB](https://www.mongodb.com/try/download/community).
 ```
 git clone https://github.com/StudioDEVIOO/vuejs-dashboard.git
 cd vuejs-dashboard
