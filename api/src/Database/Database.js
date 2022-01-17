@@ -55,43 +55,18 @@ class Database {
         return newUser
     }
 
-    getUsername(id) {
+    getUser(id) {
         return User.findOne({
             _id: id
         }).then(user => {
-            return user.username
-        })
-    }
-
-    getMail(id) {
-        return User.findOne({
-            _id: id
-        }).then(user => {
-            return user.email
-        })
-    }
-
-    getBiography(id) {
-        return User.findOne({
-            _id: id
-        }).then(user => {
-            return user.biography
-        })
-    }
-
-    getRole(id) {
-        return User.findOne({
-            _id: id
-        }).then(user => {
-            return user.role
-        })
-    }
-
-    getOauth(id) {
-        return User.findOne({
-            _id: id
-        }).then(user => {
-            return user.oauth
+            return {
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                biography: user.biography,
+                role: user.role,
+                oauth: user.oauth
+            }
         })
     }
 
@@ -139,15 +114,6 @@ class Database {
             _id: id
         }).then(user => {
             user.biography = biography
-            return user.save()
-        })
-    }
-
-    setRole(id, role) {
-        return User.findOne({
-            _id: id
-        }).then(user => {
-            user.role = role
             return user.save()
         })
     }

@@ -5,23 +5,14 @@ let db = new Database(config.database.uri);
 async function routes (fastify, options) {
 
     fastify.route({
-        method: 'POST',
+        method: 'GET',
         url: '/users/me',
         handler: async (request, reply) => {
             await request.jwtVerify()
             let userID = request.user.id;
 
             reply.type('application/json').code(200);
-            reply.send(
-                {
-                    "id": userID,
-                    "username": await db.getUsername(userID),
-                    "email": await db.getMail(userID),
-                    "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID),
-                    "oauth": await db.getOauth(userID),
-                }
-            )
+            reply.send(await db.getUser(userID));
         }
     })
 
@@ -55,16 +46,7 @@ async function routes (fastify, options) {
             }
 
             reply.type('application/json').code(200);
-            reply.send(
-                {
-                    "id": userID,
-                    "username": username,
-                    "email": await db.getMail(userID),
-                    "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID),
-                    "oauth": await db.getOauth(userID),
-                }
-            )
+            reply.send(await db.getUser(userID).username);
         }
     })
 
@@ -98,16 +80,7 @@ async function routes (fastify, options) {
             }
 
             reply.type('application/json').code(200);
-            reply.send(
-                {
-                    "id": userID,
-                    "username": await db.getUsername(userID),
-                    "email": email,
-                    "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID),
-                    "oauth": await db.getOauth(userID),
-                }
-            )
+            reply.send(await db.getUser(userID).email);
         }
     })
 
@@ -143,16 +116,9 @@ async function routes (fastify, options) {
             await db.setPassword(userID, password);
 
             reply.type('application/json').code(200);
-            reply.send(
-                {
-                    "id": userID,
-                    "username": await db.getUsername(userID),
-                    "email": await db.getMail(userID),
-                    "biography": await db.getBiography(userID),
-                    "role": await db.getRole(userID),
-                    "oauth": await db.getOauth(userID),
-                }
-            )
+            reply.send({
+                "changed": true
+            });
         }
     })
 
@@ -180,16 +146,7 @@ async function routes (fastify, options) {
             await db.setBiography(userID, biography);
 
             reply.type('application/json').code(200);
-            reply.send(
-                {
-                    "id": userID,
-                    "username": await db.getUsername(userID),
-                    "email": await db.getMail(userID),
-                    "biography": biography,
-                    "role": await db.getRole(userID),
-                    "oauth": await db.getOauth(userID),
-                }
-            )
+            reply.send((await db.getUser(userID)).biography);
         }
     })
 }
