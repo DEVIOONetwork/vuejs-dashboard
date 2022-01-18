@@ -1,6 +1,6 @@
 {
   "api": {
-    "url": "https://vue-dash-api.pronicio.tk"
+    "url": "http://127.0.0.1:3000"
   },
   "oauth2": {
     "discord": "https://discord.com/api/oauth2/authorize?client_id=929791388541943858&redirect_uri=https%3A%2F%2Fvue-dash-api.pronicio.tk%2Foauth2%2Fdiscord&response_type=code&scope=identify%20email",

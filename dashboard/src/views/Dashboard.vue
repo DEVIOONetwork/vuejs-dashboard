@@ -59,13 +59,13 @@
           <div class="card orange card-big">
             <p class="title">Custom avatar url</p>
             <form class="txt-content" v-on:submit.prevent="updateAvatarCustomUrl">
-              <input type="text" v-model="avatarCustomUrl" maxlength="200" placeholder="https://i.imgur.com/..." class="editAccount"/>
+              <input type="text" v-model="avatarCustomUrl" maxlength="90" placeholder="https://i.imgur.com/..." class="editAccount"/>
               <button class="btn-save">Update</button>
             </form>
           </div>
 
           <div v-if="avatarCustomUrl" class="card green fit-content">
-            <img :src="avatarCustomUrl" height="180" alt="avatar">
+            <img :src="avatarCustomUrl" height="180" width="180" alt="avatar">
           </div>
         </div>
 
@@ -82,7 +82,7 @@
           </div>
 
           <div v-if="avatarType && avatarName" class="card green fit-content">
-            <img :src="`https://avatars.dicebear.com/api/${this.avatarType}/${this.avatarName}.svg`" height="230" alt="avatar">
+            <img :src="`https://avatars.dicebear.com/api/${this.avatarType}/${this.avatarName}.svg`" height="230" width="230" alt="avatar">
           </div>
         </div>
      </div>
