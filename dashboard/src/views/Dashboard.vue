@@ -7,6 +7,10 @@
       <div id="default" v-if="mode === null || mode === 'Dashboard'">
 
         <div class="cardAlign">
+          <div class="card blue fit-content">
+            <img v-if="avatar" :src="avatar" height="130" alt="avatar">
+            <img v-if="!avatar" height="130" :src="`https://avatars.dicebear.com/api/avataaars/${username}.svg`" alt="avatar">
+          </div>
           <div class="card purple card-medium">
             <p class="title">Welcome {{ username }} <i class="twa twa-waving-hand"></i></p>
             <p class="txt-content">{{ biography === null ? "No biography" : biography }}</p>
@@ -20,14 +24,14 @@
             <p class="title">Edit username</p>
             <form class="txt-content" v-on:submit.prevent="updateUsername">
               <input type="text" v-model="editUsername" maxlength="20" placeholder="Username" class="editAccount"/>
-              <button @click="updateUsername()" class="btn-save">Update</button>
+              <button class="btn-save">Update</button>
             </form>
           </div>
           <div v-if="this.oauth" class="card orange card-medium">
             <p class="title">Edit email</p>
             <form class="txt-content" v-on:submit.prevent="updateEmail">
               <input type="text" v-model="editEmail" maxlength="30" placeholder="exemple@mail.com" class="editAccount"/>
-              <button @click="updateEmail()" class="btn-save">Update</button>
+              <button class="btn-save">Update</button>
             </form>
           </div>
           <div v-if="this.oauth" class="card orange card-medium">
@@ -35,14 +39,14 @@
             <form class="txt-content" v-on:submit.prevent="updatePassword">
               <input type="password" v-model="editPassword" maxlength="20" placeholder="Password" class="editAccount"/>
               <input type="password" v-model="editPasswordConfirm" maxlength="20" placeholder="Confirm Password" class="editAccount"/>
-              <button @click="updatePassword()" class="btn-save">Update</button>
+              <button class="btn-save">Update</button>
             </form>
           </div>
           <div class="card orange card-big">
             <p class="title">Edit bio</p>
             <form v-on:submit.prevent="updateBiography">
               <textarea v-model="editBio" maxlength="500" placeholder="I'm a developer!" class="editAccount"></textarea>
-              <button @click="updateBiography" class="btn-save">Update</button>
+              <button class="btn-save">Update</button>
             </form>
           </div>
         </div>
@@ -86,7 +90,8 @@ export default {
           icon: "fas fa-sign-out-alt",
         }
       ],
-      mode: null
+      mode: null,
+      avatar: null,
       }
     },
     methods: {
@@ -202,7 +207,7 @@ export default {
       }
 
       fetch(`${config.api.url}/users/me`, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
@@ -214,6 +219,7 @@ export default {
           this.username = data.username;
           this.biography = data.biography;
           this.oauth = data.oauth;
+          this.avatar = data.avatar;
 
         })
       .catch(error => {

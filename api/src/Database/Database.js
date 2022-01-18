@@ -32,7 +32,7 @@ class Database {
         return user.password === pass ? user : false
     }
 
-    async register(username, email, password, oauth) {
+    async register(username, email, password, oauth, avatar) {
         let nv = await User.findOne({
             username: username
         })
@@ -47,7 +47,8 @@ class Database {
             username: username,
             email: email,
             password: CryptoJS.SHA256(password).toString(),
-            oauth: oauth
+            oauth: oauth,
+            avatar: avatar,
         })
 
         await newUser.save()
@@ -64,6 +65,7 @@ class Database {
                 username: user.username,
                 email: user.email,
                 biography: user.biography,
+                avatar: user.avatar,
                 role: user.role,
                 oauth: user.oauth
             }

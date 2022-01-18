@@ -46,7 +46,8 @@ async function routes (fastify, options) {
             }
 
             reply.type('application/json').code(200);
-            reply.send(await db.getUser(userID).username);
+            reply.send(await db.getUser(userID));
+
         }
     })
 
@@ -80,7 +81,8 @@ async function routes (fastify, options) {
             }
 
             reply.type('application/json').code(200);
-            reply.send(await db.getUser(userID).email);
+            reply.send(await db.getUser(userID));
+
         }
     })
 
@@ -116,9 +118,8 @@ async function routes (fastify, options) {
             await db.setPassword(userID, password);
 
             reply.type('application/json').code(200);
-            reply.send({
-                "changed": true
-            });
+            reply.send(await db.getUser(userID));
+
         }
     })
 
@@ -146,7 +147,7 @@ async function routes (fastify, options) {
             await db.setBiography(userID, biography);
 
             reply.type('application/json').code(200);
-            reply.send((await db.getUser(userID)).biography);
+            reply.send(await db.getUser(userID));
         }
     })
 }
