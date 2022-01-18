@@ -4,6 +4,7 @@
     <Sidebar v-bind:items="items" @clicked="changeMode"/>
     <div id="board">
 
+      <!-- Default view -->
       <div id="default" v-if="mode === null || mode === 'Dashboard'">
 
         <div class="cardAlign">
@@ -52,12 +53,46 @@
         </div>
       </div>
 
+      <!--- Edit user Avatar -->
+      <div v-if="mode === 'My Avatar'">
+        <div class="cardAlign">
+          <div class="card orange card-big">
+            <p class="title">Custom avatar url</p>
+            <form class="txt-content" v-on:submit.prevent="updateAvatarCustomUrl">
+              <input type="text" v-model="avatarCustomUrl" maxlength="200" placeholder="https://i.imgur.com/..." class="editAccount"/>
+              <button class="btn-save">Update</button>
+            </form>
+          </div>
+
+          <div v-if="avatarCustomUrl" class="card green fit-content">
+            <img :src="avatarCustomUrl" height="180" alt="avatar">
+          </div>
+        </div>
+
+        <div class="cardAlign">
+          <div class="card orange card-big">
+            <p class="title">Custom avatar</p>
+            <form class="txt-content" v-on:submit.prevent="updateCustomAvatar">
+              <input type="text" placeholder="Name" maxlength="30" v-model="avatarName" class="editAccount"/>
+              <select v-model="avatarType" class="editAccount">
+                <option v-for="type in avatarTypes" :key="type">{{ type }}</option>
+              </select>
+              <button class="btn-save">Update</button>
+            </form>
+          </div>
+
+          <div v-if="avatarType && avatarName" class="card green fit-content">
+            <img :src="`https://avatars.dicebear.com/api/${this.avatarType}/${this.avatarName}.svg`" height="230" alt="avatar">
+          </div>
+        </div>
+     </div>
+
       <div v-if="mode === 'Logout'">
         {{ this.$router.push('/Logout') }}) }}
       </div>
 
-    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -86,17 +121,28 @@ export default {
          icon: "fas fa-tachometer-alt",
         },
         {
+          name: "My Avatar",
+          icon: "fas fa-sliders-h"
+        },
+        {
           name: "Logout",
           icon: "fas fa-sign-out-alt",
         }
       ],
       mode: null,
       avatar: null,
+      avatarCustomUrl: null,
+      avatarName: this.username,
+      avatarTypes: ["adventurer", "adventurer-neutral", "avataaars", "big-ears", "big-ears-neutral", "big-smile", "bottts", "croodles", "croodles-neutral", "identicon", "initials", "micah", "miniavs", "open-peeps", "personas", "pixel-art", "pixel-art-neutral"],
+      avatarType: "adventurer",
       }
     },
     methods: {
       changeMode(mode) {
         this.mode = mode
+      },
+      buildAvatarUrl() {
+        return `https://avatars.dicebear.com/api/${this.avatarType}/${this.avatarName}.svg`
       },
 
       updateUsername() {
@@ -199,6 +245,36 @@ export default {
           toast.error(err.toString())
         })
       },
+      updateAvatarCustomUrl() {
+        this.updateAvatar(this.avatarCustomUrl)
+      },
+      updateCustomAvatar() {
+        this.updateAvatar(this.buildAvatarUrl())
+      },
+      updateAvatar(url) {
+        fetch(`${config.api.url}/users/me/avatar`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify({
+            avatar: url
+          })
+        }).then(async res => {
+          if (res.status === 200) {
+            this.avatar = url
+            toast.success("Avatar updated")
+          } else if (res.status === 400) {
+            let data = await res.json()
+            toast.error(data.error)
+          } else {
+            toast.error("Something went wrong")
+          }
+        }).catch(err => {
+          toast.error(err.toString())
+        })
+      }
     },
     created() {
 

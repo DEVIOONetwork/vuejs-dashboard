@@ -119,7 +119,14 @@ class Database {
             return user.save()
         })
     }
-
+    setAvatar(id, avatar) {
+        return User.findOne({
+            _id: id
+        }).then(user => {
+            user.avatar = avatar
+            return user.save()
+        })
+    }
 
 }
 

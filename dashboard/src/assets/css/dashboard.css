@@ -143,6 +143,17 @@ textarea.editAccount {
     width: calc(100% - 20px);
     height: calc(100% - 20px);
 }
+select.editAccount {
+    border: 1px solid #ccc;
+    background: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 10px;
+    border-radius: 3px;
+    width: 100%;
+    margin-top: 5px;
+}
 .btn-save {
     background: #0073b7;
     background: linear-gradient(to bottom, #0073b7 0%, #0062a7 100%);

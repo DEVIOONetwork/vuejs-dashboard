@@ -150,6 +150,34 @@ async function routes (fastify, options) {
             reply.send(await db.getUser(userID));
         }
     })
+
+    fastify.route({
+        method: 'POST',
+        url: '/users/me/avatar',
+        handler: async (request, reply) => {
+            await request.jwtVerify()
+
+            if (!request.body.avatar) {
+                return reply.code(400).send({
+                    error: "Missing avatar"
+                })
+            }
+
+            if (request.body.avatar.length > 90) {
+                return reply.code(400).send({
+                    error: "Avatar too long"
+                })
+            }
+
+            let userID = request.user.id;
+            let avatar = request.body.avatar;
+
+            await db.setAvatar(userID, avatar);
+
+            reply.type('application/json').code(200);
+            reply.send(await db.getUser(userID));
+        }
+    })
 }
 
 module.exports = routes;
