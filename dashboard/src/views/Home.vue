@@ -18,8 +18,14 @@ export default {
   },
   created: async function () {
     if (this.$route.query.token) {
-      localStorage.setItem('token', this.$route.query.token)
-      console.log('Success login!')
+
+      this.$store.state.user = {
+        token: this.$route.query.token,
+        expired: false,
+        expIn: this.$route.query.exp
+      }
+
+      this.$store.commit('setToken')
       await this.$router.push('/dashboard')
     }
   }

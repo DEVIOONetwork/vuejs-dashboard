@@ -14,13 +14,8 @@ export default {
     Header
   },
   created() {
-    if (localStorage.getItem('token') !== null) {
-      localStorage.removeItem('token')
-      console.log('Success logout')
-      this.$router.push('/');
-    } else {
-      this.$router.push('/');
-    }
+    this.$store.commit('deleteToken');
+    this.$router.push('/');
   }
 }
 </script>

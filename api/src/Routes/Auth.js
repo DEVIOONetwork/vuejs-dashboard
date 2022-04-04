@@ -28,8 +28,11 @@ async function routes (fastify, options) {
                 email: user.email
             })
 
+            let decoded = fastify.jwt.decode(token)
+
             rep.send({
-                token: token
+                token: token,
+                exp: decoded.exp
             })
         }
     })
@@ -73,8 +76,11 @@ async function routes (fastify, options) {
                 email: user.email
             })
 
+            let decoded = fastify.jwt.decode(token)
+
             rep.send({
                 token: token,
+                exp: decoded.exp,
                 user: {
                     id: user.id,
                     username: user.username,
@@ -128,7 +134,9 @@ async function routes (fastify, options) {
                 email: user.email
             })
 
-            rep.redirect(`${config.client_uri}?token=${token}`)
+            let decoded = fastify.jwt.decode(token)
+
+            rep.redirect(`${config.client_uri}?token=${token}&exp=${decoded.exp}`)
         }
     })
 
@@ -170,7 +178,9 @@ async function routes (fastify, options) {
                 email: user.email
             })
 
-            rep.redirect(`${config.client_uri}?token=${token}`)
+            let decoded = fastify.jwt.decode(token)
+
+            rep.redirect(`${config.client_uri}?token=${token}&exp=${decoded.exp}`)
         }
     })
 }

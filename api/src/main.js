@@ -15,6 +15,12 @@ fastify.register(require('fastify-cors'), {
     credentials: true
 })
 
+fastify.get('/', async function (req, rep) {
+    rep.send({
+        hello: 'world'
+    })
+})
+
 fastify.register(require('./Routes/Auth'))
 fastify.register(require('./Routes/Users'))
 

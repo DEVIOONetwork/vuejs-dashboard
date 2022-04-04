@@ -150,7 +150,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization": `Bearer ${this.$store.state.user.token}`
           },
           body: JSON.stringify({
             username: this.editUsername
@@ -175,7 +175,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization": `Bearer ${this.$store.state.user.token}`
           },
           body: JSON.stringify({
             email: this.editEmail
@@ -199,7 +199,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization": `Bearer ${this.$store.state.user.token}`
           },
           body: JSON.stringify({
             password: this.editPassword,
@@ -225,7 +225,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization": `Bearer ${this.$store.state.user.token}`
           },
           body: JSON.stringify({
             biography: this.editBio
@@ -256,7 +256,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization": `Bearer ${this.$store.state.user.token}`
           },
           body: JSON.stringify({
             avatar: url
@@ -278,20 +278,23 @@ export default {
     },
     created() {
 
-      if (localStorage.getItem("token") === null) {
+      if (!this.$store.state.user.token && this.$store.state.user.expired) {
         this.$router.push("/login");
       }
 
       fetch(`${config.api.url}/users/me`, {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          "Authorization": `Bearer ${this.$store.state.user.token}`
         }
       })
         .then(async response => {
-          if (!response.ok) return await this.$router.push("/login");
-
           let data = await response.json();
+
+          if (!response.ok || response.status === 401) {
+            return await this.$router.push("/login");
+          }
+
           this.username = data.username;
           this.biography = data.biography;
           this.oauth = data.oauth;

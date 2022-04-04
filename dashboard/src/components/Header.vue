@@ -16,7 +16,7 @@
     name: 'Logout',
     data () {
       return {
-        token: localStorage.getItem('token')
+        token: this.$store.state.user.token
       }
     }
   }

@@ -70,8 +70,13 @@ export default {
           if (data.error) {
             data.message ? this.error = data.message : this.error = data.error
           } else {
-            localStorage.setItem('token', data.token)
-            console.log('Success login!')
+            this.$store.state.user = {
+              token: data.token,
+              expired: false,
+              expIn: data.exp
+            }
+
+            this.$store.commit('setToken')
             await this.$router.push('/dashboard')
           }
         }).catch(err => {
@@ -81,7 +86,7 @@ export default {
     }
   },
   created() {
-    if (localStorage.getItem('token')) {
+    if (this.$store.state.user.token && !this.$store.state.user.expired) {
       this.$router.push('/dashboard')
     }
     if (this.$route.query.error) {
