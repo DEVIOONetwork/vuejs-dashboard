@@ -2,7 +2,7 @@ const Database = require("../Database/Database");
 const config = require("../../config.json");
 let db = new Database(config.database.uri);
 
-async function routes (fastify, options) {
+async function routes(fastify, options) {
 
     fastify.route({
         method: 'GET',

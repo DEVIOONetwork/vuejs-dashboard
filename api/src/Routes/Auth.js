@@ -3,7 +3,7 @@ const config = require("../../config.json");
 let db = new Database(config.database.uri);
 const axios = require("axios");
 
-async function routes (fastify, options) {
+async function routes(fastify, options) {
 
     fastify.route({
         method: 'POST',
@@ -23,9 +23,7 @@ async function routes (fastify, options) {
             }
 
             let token = fastify.jwt.sign({
-                id: user.id,
-                username: user.username,
-                email: user.email
+                id: user.id
             })
 
             let decoded = fastify.jwt.decode(token)
@@ -71,9 +69,7 @@ async function routes (fastify, options) {
             }
 
             let token = fastify.jwt.sign({
-                id: user.id,
-                username: user.username,
-                email: user.email
+                id: user.id
             })
 
             let decoded = fastify.jwt.decode(token)
@@ -129,9 +125,7 @@ async function routes (fastify, options) {
             }
 
             let token = fastify.jwt.sign({
-                id: user.id,
-                username: user.username,
-                email: user.email
+                id: user.id
             })
 
             let decoded = fastify.jwt.decode(token)
@@ -173,9 +167,7 @@ async function routes (fastify, options) {
             }
 
             let token = fastify.jwt.sign({
-                id: user.id,
-                username: user.username,
-                email: user.email
+                id: user.id
             })
 
             let decoded = fastify.jwt.decode(token)
